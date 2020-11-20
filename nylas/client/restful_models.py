@@ -559,7 +559,7 @@ class Contact(NylasAPIObject):
 
 
 class Calendar(NylasAPIObject):
-    attrs = ["id", "account_id", "name", "description", "read_only", "object"]
+    attrs = ["id", "account_id", "name", "description", "read_only", "object", "is_primary"]
     collection_name = "calendars"
 
     def __init__(self, api):
