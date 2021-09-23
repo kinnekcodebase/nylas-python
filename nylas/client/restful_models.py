@@ -302,8 +302,10 @@ class Label(NylasAPIObject):
 class Thread(NylasAPIObject):
     attrs = [
         "draft_ids",
-        "id",
         "message_ids",
+        "drafts",
+        "messages",
+        "id",
         "account_id",
         "object",
         "participants",
@@ -338,14 +340,6 @@ class Thread(NylasAPIObject):
 
     def __init__(self, api):
         NylasAPIObject.__init__(self, Thread, api)
-
-    @property
-    def messages(self):
-        return self.child_collection(Message, thread_id=self.id)
-
-    @property
-    def drafts(self):
-        return self.child_collection(Draft, thread_id=self.id)
 
     @property
     def folders(self):

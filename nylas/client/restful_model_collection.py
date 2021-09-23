@@ -133,7 +133,6 @@ class RestfulModelCollection(object):
         filters["offset"] = offset
         if not filters.get("limit"):
             filters["limit"] = limit
-
         return self.api._get_resources(self.model_class, **filters)
 
     def _get_model(self, id):
