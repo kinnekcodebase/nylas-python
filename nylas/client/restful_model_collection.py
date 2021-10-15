@@ -83,9 +83,10 @@ class RestfulModelCollection(object):
             pairs = convert_metadata_pairs_to_array(filters["metadata_pair"])
             filters["metadata_pair"] = pairs
 
-        collection = copy(self)
-        collection.filters = filters
-        return collection
+        for k, v in filters.items():
+            self.filters[k] = v
+
+        return copy(self)
 
     def get(self, id):
         return self._get_model(id)
@@ -127,7 +128,6 @@ class RestfulModelCollection(object):
             return self._get_model_collection(key, 1)[0]
 
     # Private functions
-
     def _get_model_collection(self, offset=0, limit=CHUNK_SIZE):
         filters = copy(self.filters)
         filters["offset"] = offset

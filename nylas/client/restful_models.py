@@ -342,6 +342,14 @@ class Thread(NylasAPIObject):
         NylasAPIObject.__init__(self, Thread, api)
 
     @property
+    def messages(self):
+        return self.child_collection(Message, thread_id=self.id)
+
+    @property
+    def drafts(self):
+        return self.child_collection(Draft, thread_id=self.id)
+
+    @property
     def folders(self):
         if self._folders:
             return [Folder.create(self.api, **f) for f in self._folders]

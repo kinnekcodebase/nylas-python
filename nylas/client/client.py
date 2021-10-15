@@ -295,7 +295,7 @@ class APIClient(json.JSONEncoder):
 
     @property
     def threads(self):
-        return RestfulModelCollection(Thread, self)
+        return RestfulModelCollection(Thread, self, view="expanded")
 
     @property
     def folders(self):
@@ -363,7 +363,6 @@ class APIClient(json.JSONEncoder):
         converted_filters = convert_datetimes_to_timestamps(
             filters, cls.datetime_filter_attrs
         )
-        converted_filters["view"] = "expanded"
         url = str(URLObject(url).add_query_params(converted_filters.items()))
         response = self._get_http_session(cls.api_root).get(url)
         results = _validate(response).json()
@@ -387,7 +386,6 @@ class APIClient(json.JSONEncoder):
         converted_filters = convert_datetimes_to_timestamps(
             filters, cls.datetime_filter_attrs
         )
-        converted_filters["view"] = "expanded"
         url = str(URLObject(url).add_query_params(converted_filters.items()))
         response = self._get_http_session(cls.api_root).get(
             url, headers=headers, stream=stream
